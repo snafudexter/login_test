@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import * as React from 'react';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import CONSTANT from './constant'
+import Register from './components/registration'
+import Dashboard from './components/dashboard'
+import Login from './components/login'
+import {useWindowSize} from './utils'
 import './App.css';
 
 function App() {
+  const size = useWindowSize();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <div>
+        Width: {size.width} Height: {size.height}
+      </div>
+      
+      <BrowserRouter>
+        <Switch>
+          <Route exact={true} path="/login" component={Login} />
+          <Route exact={true} path="/register" component={Register} />
+          
+          <Route path="/" component={Dashboard} />
+        </Switch>
+      </BrowserRouter>
+    
+    </React.Fragment>
   );
 }
 
